@@ -47,15 +47,10 @@ class TipContainer extends Component<Props, State> {
 
   render() {
     const { children, style, scrollTop, pageBoundingRect } = this.props;
-
     const { height, width } = this.state;
-
     const isStyleCalculationInProgress = width === 0 && height === 0;
-
     const shouldMove = style.top - height - 5 < scrollTop;
-
     const top = shouldMove ? style.bottom + 5 : style.top - height - 5;
-
     const left = clamp(
       style.left - width / 2,
       0,

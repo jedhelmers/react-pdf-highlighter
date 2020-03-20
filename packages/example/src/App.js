@@ -1,29 +1,17 @@
 // @flow
-
 import React, { Component } from "react";
-
 import URLSearchParams from "url-search-params";
-
-import {
-  PdfLoader,
-  PdfHighlighter,
-  Tip,
-  Highlight,
-  Popup,
-  AreaHighlight
-} from "react-pdf-highlighter";
-
+import { PdfLoader, PdfHighlighter, Tip, Highlight, Popup, AreaHighlight } from "react-pdf-highlighter";
 import testHighlights from "./test-highlights";
-
 import Spinner from "./Spinner";
 import Sidebar from "./Sidebar";
-
+import Pages from './Pages'
 import type {
   T_Highlight,
   T_NewHighlight
 } from "react-pdf-highlighter/src/types";
-
 import "./style/App.css";
+import samplePDF from './PDFs/SBIR.pdf'
 
 type T_ManuscriptHighlight = T_Highlight;
 
@@ -49,14 +37,18 @@ const HighlightPopup = ({ comment }) =>
     </div>
   ) : null;
 
-const DEFAULT_URL = "https://arxiv.org/pdf/1708.08021.pdf";
+// const DEFAULT_URL = "https://arxiv.org/pdf/1708.08020.pdf";
+// const DEFAULT_URL = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
+const DEFAULT_URL = samplePDF
 
 const searchParams = new URLSearchParams(document.location.search);
+console.log(Object.keys(URLSearchParams))
 const url = searchParams.get("url") || DEFAULT_URL;
 
 class App extends Component<Props, State> {
   state = {
-    highlights: testHighlights[url] ? [...testHighlights[url]] : []
+    highlights: testHighlights[url] ? [...testHighlights[url]] : [],
+    pageCount: 0
   };
 
   state: State;
@@ -118,24 +110,24 @@ class App extends Component<Props, State> {
   }
 
   render() {
-    const { highlights } = this.state;
+    const { highlights, pageCount } = this.state;
 
     return (
-      <div className="App" style={{ display: "flex", height: "100vh" }}>
-        <Sidebar
-          highlights={highlights}
-          resetHighlights={this.resetHighlights}
-        />
-        <div
-          style={{
-            height: "100vh",
-            width: "75vw",
-            overflowY: "scroll",
-            position: "relative"
-          }}
-        >
+      <div className="App" className='pdf_wrapper'>
+        <div className='pdf_sidebar'>
+          <Sidebar
+            highlights={highlights}
+            resetHighlights={this.resetHighlights}
+          />
+        </div>
+        <div className='pdf_pages'>
+          <Pages pages={pageCount}/>
+        </div>
+        <div className='pdf_body'>
           <PdfLoader url={url} beforeLoad={<Spinner />}>
-            {pdfDocument => (
+            {pdfDocument => {
+              !!pdfDocument && pageCount !== pdfDocument.numPages && this.setState({ pageCount: pdfDocument.numPages })
+              return (
               <PdfHighlighter
                 pdfDocument={pdfDocument}
                 enableAreaSelection={event => event.altKey}
@@ -206,7 +198,7 @@ class App extends Component<Props, State> {
                 }}
                 highlights={highlights}
               />
-            )}
+            )}}
           </PdfLoader>
         </div>
       </div>

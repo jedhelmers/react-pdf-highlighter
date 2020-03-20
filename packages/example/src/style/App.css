@@ -1,22 +1,102 @@
+@import './root.css';
+@import './_utility_classes.css';
+
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   color: #fff;
+}
+
+label {
+  color: var(--text-body);
+  font-size: 14px;
+}
+
+.pdf_body {
+  display: flex;
+  flex-direction: row;
+  grid-area: pdfbody;
+  overflow: scroll;
+  height: 100vh;
+  padding-top: 40px;
+  justify-content: center;
+}
+
+.pdf_sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--tint-45);
+  padding: 20px;
+  overflow: scroll;
+  height: 100vh;
+  grid-area: pdfsidebar;
+  box-shadow: -4px 0 16px var(--gray-77);
+}
+
+.pdf_pages {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--tint-45);
+  padding: 20px;
+  overflow: scroll;
+  height: 100vh;
+  grid-area: pdfpages;
+  align-items: center;
+  box-shadow: 4px 0 16px var(--gray-77);
+}
+
+.pdf_wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 200px 3fr 1fr;
+  grid-template-areas: "pdfpages pdfbody pdfsidebar";
+  background-color: var(--gray-88);
+}
+
+.page {
+  border-radius: 10px;
+  overflow: hidden !important;
+  box-shadow: 4px 4px 16px var(--gray-77);
+}
+
+.sidebar__highlight {
+  margin-bottom: 10px;
+  background-color: var(--tint-45);
+  border-radius: 4px;
+  border: 2px solid var(--white);
 }
 
 .sidebar {
   overflow: auto;
-  color: rgb(119, 119, 119);
-  background: linear-gradient(
-    rgb(249, 248, 247),
-    rgb(251, 250, 248) 46px,
-    rgb(251, 251, 249) 120px,
-    rgb(248, 247, 245) 35%,
-    rgb(249, 248, 246)
-  );
+  color: var(--text-body);
+}
+
+
+.thumbnail {
+  min-height: 160px;
+  width: 120px;
+
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: var(--translucent-gray-25);
+  border: 2px solid var(--white);
+  color: var(--text-body);
+}
+
+.canvasWrapper {
+  background-color: var(--white);
+}
+
+.pdfViewer {
+  background-color: var(--gray-88);
+  padding: 20px;
 }
 
 .sidebar__highlights {
@@ -40,7 +120,7 @@ body {
   padding: 1rem;
   cursor: pointer;
   transition: background 140ms ease-in;
-  border-bottom: 1px solid rgb(119, 119, 119);
+  /* border-bottom: 1px solid rgb(119, 119, 119); */
 }
 
 .sidebar__highlight:hover {
@@ -61,4 +141,27 @@ blockquote:before {
 }
 blockquote:after {
   content: close-quote;
+}
+
+button,
+.button,
+input[type="submit"] {
+  align-items: center;
+  background: var(--white) 0% 0% no-repeat;
+  border: 1px solid var(--gray-45);
+  border-radius: 6px;
+  color: var(--text-body);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 36px;
+  justify-content: center;
+  min-width: 125px;
+  outline: 0;
+  background-color: var(--primary);
+  border: 1px solid var(--primary-dark);
+  color: var(--white);
+  font-size: 16px;
+  height: 35px;
+  min-width: 160px;
 }

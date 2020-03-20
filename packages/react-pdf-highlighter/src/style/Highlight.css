@@ -7,6 +7,10 @@
   color: black;
   opacity: 1;
   font-size: 28px;
+  background-color: var(--translucent-gray-25);
+  padding: 4px;
+  border-radius: 40px;
+  opacity: .5;
 }
 
 .Highlight__parts {
@@ -16,8 +20,8 @@
 .Highlight__part {
   cursor: pointer;
   position: absolute;
-  background: rgba(255, 226, 143, 1);
-  transition: background 0.3s;
+  background: rgba(255, 250, 0, .25);
+  transition: var(--warning) 0.3s;
 }
 
 .Highlight__popup {
