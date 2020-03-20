@@ -65,6 +65,8 @@
   --translucent-gray-25: rgba(0, 0, 0, 0.25);
   --translucent-gray-5: rgba(0, 0, 0, 0.05);
   --translucent-primary: #486bac0d;
+  --tint-25: rgba(255, 255, 255, 0.25);
+  --tint-45: rgba(255, 255, 255, 0.45);
 
   /* // Main colors for the site */
   --text: rgba(0, 0, 0, 0.91);

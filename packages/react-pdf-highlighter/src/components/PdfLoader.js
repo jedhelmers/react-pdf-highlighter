@@ -44,7 +44,6 @@ class PdfLoader extends Component<Props, State> {
   render() {
     const { children, beforeLoad } = this.props;
     const { pdfDocument } = this.state;
-
     if (pdfDocument) {
       return children(pdfDocument);
     }

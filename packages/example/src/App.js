@@ -5,6 +5,7 @@ import { PdfLoader, PdfHighlighter, Tip, Highlight, Popup, AreaHighlight } from 
 import testHighlights from "./test-highlights";
 import Spinner from "./Spinner";
 import Sidebar from "./Sidebar";
+import Pages from './Pages'
 import type {
   T_Highlight,
   T_NewHighlight
@@ -46,7 +47,8 @@ const url = searchParams.get("url") || DEFAULT_URL;
 
 class App extends Component<Props, State> {
   state = {
-    highlights: testHighlights[url] ? [...testHighlights[url]] : []
+    highlights: testHighlights[url] ? [...testHighlights[url]] : [],
+    pageCount: 0
   };
 
   state: State;
@@ -108,27 +110,24 @@ class App extends Component<Props, State> {
   }
 
   render() {
-    const { highlights } = this.state;
+    const { highlights, pageCount } = this.state;
 
     return (
-      <div className="App" className='pdf_wrapper' style={{ height: "100vh" }}>
+      <div className="App" className='pdf_wrapper'>
         <div className='pdf_sidebar'>
           <Sidebar
             highlights={highlights}
             resetHighlights={this.resetHighlights}
           />
         </div>
-        <div
-          className='pdf_body'
-          style={{
-            height: "100vh",
-            width: "75vw",
-            overflowY: "scroll",
-            position: "relative"
-          }}
-        >
+        <div className='pdf_pages'>
+          <Pages pages={pageCount}/>
+        </div>
+        <div className='pdf_body'>
           <PdfLoader url={url} beforeLoad={<Spinner />}>
-            {pdfDocument => (
+            {pdfDocument => {
+              !!pdfDocument && pageCount !== pdfDocument.numPages && this.setState({ pageCount: pdfDocument.numPages })
+              return (
               <PdfHighlighter
                 pdfDocument={pdfDocument}
                 enableAreaSelection={event => event.altKey}
@@ -199,7 +198,7 @@ class App extends Component<Props, State> {
                 }}
                 highlights={highlights}
               />
-            )}
+            )}}
           </PdfLoader>
         </div>
       </div>

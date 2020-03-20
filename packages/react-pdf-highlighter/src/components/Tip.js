@@ -69,8 +69,8 @@ class Tip extends Component<Props, State> {
                   }
                 }}
               />
-              <div>
-                {["💩", "😱", "😍", "🔥", "😳", "⚠️"].map(_emoji => (
+              <div className='flex-row-sa'>
+                {["Recommended", "Required"].map(_emoji => (
                   <label key={_emoji}>
                     <input
                       checked={emoji === _emoji}
