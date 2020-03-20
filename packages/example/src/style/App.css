@@ -1,3 +1,6 @@
+@import './root.css';
+@import './_utility_classes.css';
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -7,16 +10,46 @@ body {
   color: #fff;
 }
 
+
+.pdf_body {
+  display: flex;
+  flex-direction: column;
+  grid-area: pdf_body;
+}
+
+.pdf_sidebar {
+  display: flex;
+  flex-direction: column;
+  grid-area: pdf_sidebar;
+}
+
+.pdf_wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 600px;
+  grid-template-areas: "pdf_body pdf_sidebar";
+}
+
+
 .sidebar {
   overflow: auto;
-  color: rgb(119, 119, 119);
+  color: var(--text-body);
   background: linear-gradient(
-    rgb(249, 248, 247),
-    rgb(251, 250, 248) 46px,
-    rgb(251, 251, 249) 120px,
-    rgb(248, 247, 245) 35%,
-    rgb(249, 248, 246)
+    var(--gray-88),
+    var(--gray-88) 46px,
+    var(--gray-88) 120px,
+    var(--gray-88) 35%,
+    var(--gray-88)
   );
+}
+
+.canvasWrapper {
+  background-color: var(--white);
+}
+
+.pdfViewer {
+  background-color: var(--gray-88);
+  padding: 20px;
 }
 
 .sidebar__highlights {

@@ -23,7 +23,7 @@ function Sidebar({ highlights, resetHighlights }: Props) {
         <p style={{ fontSize: "0.7rem" }}>
           <a href="https://github.com/agentcooper/react-pdf-highlighter">
             Open in GitHub
-          </a>
+          </a> 
         </p>
 
         <p>
